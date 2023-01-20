@@ -3,11 +3,12 @@ import Layout from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 
-type singlePostType = {
+export type singlePostType = {
   id: string
   date: string
   title: string
   data: string
+  contentHTML: string
 }
 
 type homeType = {
