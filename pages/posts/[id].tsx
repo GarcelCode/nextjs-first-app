@@ -1,6 +1,9 @@
+import Head from 'next/head'
 import { singlePostType } from '..'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
+import Date from '../../components/date'
+import utilStyles from '../../styles/utils.module.css'
 
 type postDataType = {
   params: {
@@ -30,16 +33,18 @@ export async function getStaticPaths() {
 }
 
 export default function Post({ postData }: postType) {
-  console.log(postData)
   return (
-    <Layout home>
-      <div>{postData.title}</div>
-      <br />
-      <div>{postData.id}</div>
-      <br />
-      <div>{postData.date}</div>
-      <br />
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
+    <Layout home={false}>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateString={postData.date} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
+      </article>
     </Layout>
   )
 }
